@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warmer near-black with cream ink. ChatGPT/Claude register. */
+  --color-bg: oklch(13% 0.006 250);
+  --color-surface: oklch(16% 0.008 250);
+  --color-surface-high: oklch(20% 0.009 250);
+  --color-surface-alt: oklch(15% 0.007 250);
+  --color-hairline: oklch(24% 0.008 250);
+  --color-hairline-bright: oklch(30% 0.012 250);
+  --color-muted: oklch(60% 0.012 250);
+  --color-ink-dim: oklch(82% 0.008 80);
+  --color-ink: oklch(96% 0.006 80);
+
+  /* Accent — pastel xenon green. Used sparingly. NO glow utilities anywhere. */
+  --color-accent: oklch(85% 0.09 145);
+  --color-accent-hi: oklch(91% 0.07 145);
+
+  /* Typography */
+  --font-sans: "Inter", "Inter Tight", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+  --container-page: 1180px;
+}
+
+@layer base {
+  :root { color-scheme: dark; }
+
+  html, body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100svh;
+  }
+
+  ::selection {
+    background: oklch(85% 0.09 145 / 0.3);
+    color: var(--color-ink);
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-hairline); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-surface-high); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .border-hairline { border-color: var(--color-hairline); }
+  .border-hairline-bright { border-color: var(--color-hairline-bright); }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .tracking-display { letter-spacing: -0.022em; }
+  .tracking-display-tight { letter-spacing: -0.032em; }
+  .tracking-display-xl { letter-spacing: -0.04em; }
+
+  /* Soft surface — used sparingly. No accent glow. */
+  .surface-soft {
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    transition: border-color 240ms ease;
+  }
+  .surface-soft:hover { border-color: var(--color-hairline-bright); }
+
+  /* The product window mockup — premium frame, no accent glow */
+  .window-frame {
+    background: linear-gradient(180deg, oklch(20% 0.009 250 / 0.85), oklch(16% 0.008 250 / 0.85));
+    border: 1px solid var(--color-hairline-bright);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow:
+      0 1px 0 0 oklch(96% 0.006 80 / 0.04) inset,
+      0 30px 80px -24px oklch(0% 0 0 / 0.7);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Subtle page haze (very low opacity, single radial) */
+  .page-haze {
+    background: radial-gradient(ellipse 60% 35% at 50% -5%, oklch(70% 0.05 240 / 0.10), transparent 70%);
+  }
+}
