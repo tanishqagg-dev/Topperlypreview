@@ -11,15 +11,6 @@ import { ClosingCTA } from "../components/ClosingCTA";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.85, ease: EASE, delay: 0.06 + i * 0.08 },
-  }),
-};
-
 const inView: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
